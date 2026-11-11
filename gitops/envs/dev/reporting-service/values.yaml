@@ -1,5 +1,5 @@
 image:
-  repository: 577152805698.dkr.ecr.REGION.amazonaws.com/icollect/reporting-service
+  repository: 577152805698.dkr.ecr.ap-south-1.amazonaws.com/icollect/reporting-service
   tag: 0582d692
 containerPort: 8084
 service:

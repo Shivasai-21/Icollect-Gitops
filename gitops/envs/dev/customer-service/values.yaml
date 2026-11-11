@@ -1,5 +1,5 @@
 image:
-  repository: 577152805698.dkr.ecr.REGION.amazonaws.com/icollect/customer-service
+  repository: 577152805698.dkr.ecr.ap-south-1.amazonaws.com/icollect/customer-service
   tag: 25929e0c
 containerPort: 8081
 service:

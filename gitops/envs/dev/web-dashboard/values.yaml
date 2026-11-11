@@ -1,5 +1,5 @@
 image:
-  repository: 577152805698.dkr.ecr.REGION.amazonaws.com/icollect/web-dashboard
+  repository: 577152805698.dkr.ecr.ap-south-1.amazonaws.com/icollect/web-dashboard
   tag: 0582d692
 containerPort: 8080
 service:
