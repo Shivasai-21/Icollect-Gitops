@@ -12,7 +12,7 @@ spec:
         repoURL: https://github.com/shivasai-21/icollect-gitops.git
         revision: main
         directories:
-          - path: envs/dev/*
+          - path: gitops/envs/dev/*
   template:
     metadata:
       name: '{{ .path.basename }}-dev'
@@ -23,11 +23,11 @@ spec:
       source:
         repoURL: https://github.com/shivasai-21/icollect-gitops.git
         targetRevision: main
-        path: charts/microservice
+        path: gitops/charts/microservice
         helm:
           releaseName: '{{ .path.basename }}'
           valueFiles:
-            - '../../{{ .path.path }}/values.yaml'
+            - '../../../{{ .path.path }}/values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: icollect-dev
