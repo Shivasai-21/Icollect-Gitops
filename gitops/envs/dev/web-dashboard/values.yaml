@@ -1,6 +1,6 @@
 image:
   repository: 577152805698.dkr.ecr.ap-south-1.amazonaws.com/icollect/web-dashboard
-  tag: 8bb67fbc
+  tag: 678b4f18
 containerPort: 8080
 service:
   port: 8080
