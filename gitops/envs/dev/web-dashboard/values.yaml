@@ -3,6 +3,7 @@ image:
   tag: 0582d692
 containerPort: 8080
 service:
+  type: LoadBalancer
   port: 8080
 replicaCount: 1
 resources:
