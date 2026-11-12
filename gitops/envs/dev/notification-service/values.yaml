@@ -17,3 +17,6 @@ env:
 probes:
   livenessPath: /health
   readinessPath: /health
+ingress:
+  enabled: true
+  path: /notification

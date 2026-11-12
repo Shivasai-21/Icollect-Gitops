@@ -19,3 +19,6 @@ podSecurityContext:
 probes:
   livenessPath: /healthz
   readinessPath: /healthz
+ingress:
+  enabled: true
+  path: /
