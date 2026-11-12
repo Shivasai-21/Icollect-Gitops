@@ -1,6 +1,6 @@
 image:
   repository: 577152805698.dkr.ecr.ap-south-1.amazonaws.com/icollect/web-dashboard
-  tag: 72ae7720
+  tag: e955093c
 containerPort: 8080
 service:
   type: LoadBalancer
