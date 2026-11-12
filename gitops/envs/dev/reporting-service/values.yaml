@@ -21,4 +21,4 @@ probes:
   readinessPath: /health
 ingress:
   enabled: true
-  path: /reporting
+  path: /reportings
