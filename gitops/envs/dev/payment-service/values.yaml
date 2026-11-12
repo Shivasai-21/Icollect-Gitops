@@ -28,3 +28,6 @@ podAnnotations:
   prometheus.io/scrape: "true"
   prometheus.io/path: /actuator/prometheus
   prometheus.io/port: "8082"
+ingress:
+  enabled: true
+  path: /payments
