@@ -1,14 +1,51 @@
 #!/usr/bin/env bash
-# Sets image.tag for one service in one environment. Run from the repository root.
-# Usage: scripts/set-image-tag.sh <service> <tag> [env=dev]
-# Used by hand, and by Jenkins (jenkins/update-gitops.sh) after every image push.
+
+# Sets image.tag for one service in one environment.
+#
+# Usage:
+#   scripts/set-image-tag.sh <service> <tag> [env=dev]
+#
+# Example:
+#   scripts/set-image-tag.sh payment-service 93270542 dev
+#
+# Used by:
+#   - Jenkins (jenkins/update-gitops.sh)
+#   - Manual updates
+
 set -euo pipefail
-[ $# -ge 2 ] || { echo "Usage: $0 <service> <tag> [env]" >&2; exit 1; }
-svc="$1"; tag="$2"; env="${3:-dev}"
-file="envs/${env}/${svc}/values.yaml"
-[ -f "$file" ] || { echo "not found: $file" >&2; exit 1; }
-# Only the tag line inside the image block (two-space indent) is touched
-sed -i.bak -E "s|^(  tag: ).*|\1${tag}|" "$file"
-rm -f "$file.bak"
-grep -q "^  tag: ${tag}\$" "$file" || { echo "could not set the tag in $file" >&2; exit 1; }
-echo "${file}: image.tag=${tag}"
+
+[ $# -ge 2 ] || {
+  echo "Usage: $0 <service> <tag> [env]" >&2
+  exit 1
+}
+
+SERVICE="$1"
+TAG="$2"
+ENVIRONMENT="${3:-dev}"
+
+FILE="envs/${ENVIRONMENT}/${SERVICE}/values.yaml"
+
+[ -f "$FILE" ] || {
+  echo "ERROR: File not found: $FILE" >&2
+  exit 1
+}
+
+echo "Updating ${FILE}"
+echo "Setting image.tag=${TAG}"
+
+# Always store tag as string
+sed -i.bak -E "s|^([[:space:]]*tag:[[:space:]]*).*$|\1\"${TAG}\"|" "$FILE"
+
+rm -f "$FILE.bak"
+
+# Verify update succeeded
+grep -q "^ *tag: \"${TAG}\"$" "$FILE" || {
+  echo "ERROR: Failed to update image tag in $FILE" >&2
+  exit 1
+}
+
+echo "SUCCESS: ${FILE}: image.tag=\"${TAG}\""
+
+echo ""
+echo "Updated image section:"
+grep -A2 "^image:" "$FILE"
